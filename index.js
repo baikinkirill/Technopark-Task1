@@ -1,37 +1,10 @@
-import { Sequelize, DataTypes } from "sequelize";
 import express from "express";
-
-// Подключение к базе данных
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./db.db",
-});
-
-// Определение модели книги
-const Book = sequelize.define(
-  "Book",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    author: DataTypes.STRING,
-    name: DataTypes.STRING,
-  },
-  {
-    createdAt: false,
-    updatedAt: false,
-    tableName: "books",
-  }
-);
+import { IndexRoute } from "./controllers/index.js";
 
 // Приложение
 const app = express();
 const port = 5000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+IndexRoute(app);
 
 app.listen(port);
